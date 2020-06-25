@@ -146,7 +146,7 @@ I tried alternatives, like `EmitContext()`, `IgnoreContext()` or `ElideContext()
 
 In fact, these two methods just call `ConfigureAwait(true)` or `ConfigureAwait(false)` internally making this the smallest package I have ever built and very easy to use:
 
-- Add the NuGet package `ObviousAwait` to your project(s)
+- Add the NuGet package [`ObviousAwait`](https://www.nuget.org/packages/ObviousAwait/) to your project(s)
 - Replace `ConfigureAwait(true)` with `KeepContext()`
 - Replace `ConfigureAwait(false)` with `FreeContext()`
 - Enjoy
