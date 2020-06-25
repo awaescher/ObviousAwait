@@ -6,7 +6,7 @@
 <img src="docs/ObviousAwait.png" width="150">
 </p>
 
-If you ever had the joy of aysnc programming in .NET, you might have seen this guy:
+If you ever had the joy of async programming in .NET, you might have seen this guy:
 
     await anyTask.ConfigureAwait(false);
 
