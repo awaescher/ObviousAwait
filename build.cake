@@ -8,7 +8,7 @@ var args = new
     RepositoryPath = Argument("repositoryPath", "."),
     Configuration = Argument("configuration", "Release"),
 	  AddCommitToDescription = Argument("addCommitToDescription", false),
-    Version = /*GitVersion(new GitVersionSettings{UpdateAssemblyInfo = false})*/ "0.1",
+    Version = GitVersion(new GitVersionSettings{UpdateAssemblyInfo = false}),
     Nuget = new
 	{
 		Source = Argument("nugetSource", "https://www.nuget.org/api/v2/package"),
@@ -65,7 +65,7 @@ Task("Pack")
         var wd = MakeAbsolute(nuspec).GetDirectory();
         var settings = new NuGetPackSettings
         {
-            Version = args.Version/*.FullSemVer*/,
+            Version = args.Version.FullSemVer,
             OutputDirectory = buildDirectory.FullPath,
             BasePath = wd,
         };

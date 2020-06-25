@@ -1,4 +1,9 @@
-## 🔥 I hate ConfigureAwait() 🔥
+        var user = await _userService      |      var user = await _userService
+            .GetAsync(id)                 vs.         .GetAsync(id)
+            .KeepContext();                |          .ConfigureAwait(continueOnCapturedContext: true);
+
+
+# 🔥 I hate ConfigureAwait() 🔥
 
 If you ever had the joy of aysnc programming in .NET, you might have seen this guy:
 
