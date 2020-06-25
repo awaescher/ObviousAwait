@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+      <id></id>
+      <id>ObviousAwait</id>
+      <version>$version$</version>
+      <copyright>Andreas Wäscher 2020</copyright>
+      <title>ObviousAwait, ConfigureAwait() done right.</title>
+      <authors>Andreas Wäscher</authors>
+      <owners>Andreas Wäscher</owners>
+      <projectUrl>https://github.com/awaescher/ObviousAwait</projectUrl>
+      <license type="file">LICENSE</license>
+      <icon>images\ObviousAwait.png</icon>
+      <requireLicenseAcceptance>false</requireLicenseAcceptance>
+      <repository url="https://github.com/awaescher/ObviousAwait" />
+      <summary>Meaningful alternatives to ConfigureAwait(true) and ConfigureAwait(false).</summary>
+      <tags>configureawait async await task tasks task-parallel-library tpl thread threading thread-synchronization synchronizationcontext multithreading netstandard obviousawait obvious keepcontext freecontext</tags>
+      <description>
+Vibrancy.Forms provides a lightweight BlurView with blur and vibrancy effects to build modern interfaces with ease.
+It's the first component to bring iOS Vibrancy effects to Xamarin Forms.
+
+This package is designed to be used with iOS and iPadOS only and will not provide blur or vibrancy effects on Android and UWP.
+      </description>
+
+    </metadata>
+
+    <files>
+
+        <!--Net Standard-->
+        <file src="ObviousAwait\bin\Release\netstandard1.0\ObviousAwait.dll" target="lib\netstandard1.0\ObviousAwait.dll" />
+        <file src="ObviousAwait\bin\Release\netstandard1.0\ObviousAwait.pdb" target="lib\netstandard1.0\ObviousAwait.pdb" />
+
+        <!--Icon-->
+        <file src="docs\ObviousAwait.png" target="images\" />
+
+        <!--License-->
+        <file src="LICENSE" target="LICENSE" />
+
+    </files>
+
+</package>
