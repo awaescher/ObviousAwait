@@ -104,7 +104,7 @@ However, chances are that he was not really sure which one to take:
 ![true or false?](docs/TrueOrFalse.png)
 
 
-# Introducing ObviousAwait
+# ❇️ Introducing ObviousAwait
 
 All of this above really bothered me since years. That's why I wanted to use obvious methods to define the behavior of continuation tasks. Methods which are ...
 - Simple but expressive
