@@ -41,7 +41,7 @@ To clarify, let's take two passages from Stephen's blog post:
 
 ### 1. The term "configure await" does not tell anything about the intent of these methods.
 
-"Configure await" does configure the way we want the awaited code to be continued. So this is not wrong at all. But, what are the options we have? `true` and `false` are not what you would use in natural language, like if you'd as a coworker, for example.
+"Configure await" does configure the way we want the awaited code to be continued. So this is not wrong at all. But, what are the options we have? `true` and `false` are not what you would use in natural language, like if you'd tell a co-worker, for example.
 
 It's just like you hopefully will never see a method that configures file access like this:
 
@@ -52,11 +52,11 @@ But instead one of these:
     File.OpenRead("import.csv");
     File.OpenWrite("import.csv");
     
-`OpenRead()` and `OpenWrite()` both configure the way the file is accessed, but it's less that we "configure" anything. It's more what we want to do with it.
+`OpenRead()` and `OpenWrite()` both configure the way the file is accessed, but it's less that we "configure" anything. It's more what we want to do with it: the intent.
 
 ### 2. Passing boolean arguments to methods is considered to be a bad practice.
 
-Passing boolean arguments is very known to developers. In many cases this is introduced to existing code when requirements arise.
+Passing boolean arguments is very known to developers. In many cases this is introduced to existing code when requirements arise, but I dare to say this is nothing to be proud of.
 
 Having code that prints an invoice, for example, might get an additional boolean argument once the customer wants to include draft watermarks:
 
@@ -106,7 +106,7 @@ However, chances are that he was not really sure which one to take:
 
 # ❇️ Introducing ObviousAwait
 
-All of this above really bothered me since years. That's why I wanted to use obvious methods to define the behavior of continuation tasks. Methods which are ...
+All of this above really bothered me for years. That's why I wanted to use obvious methods to define the behavior of code continuation. Methods which are ...
 - Simple but expressive
 - Easy to read
 - As short as possible
