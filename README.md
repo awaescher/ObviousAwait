@@ -1,13 +1,10 @@
+
 <p align="center">
-
-<img src="docs/ObviousAwait.png" width="150">
-
+<img src="docs/Comparison.png" >
 </p>
-
-                var user = await _userService          |          var user = await _userService
-                    .GetAsync(id)                     vs.             .GetAsync(id)
-                    .KeepContext();                    |              .ConfigureAwait(true);
-
+<p align="center">
+<img src="docs/ObviousAwait.png" width="150">
+</p>
 
 # 🔥 I hate ConfigureAwait() 🔥
 
