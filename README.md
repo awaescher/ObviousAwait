@@ -38,11 +38,11 @@ To clarify, let's take two passages from Stephen's blog post:
 
 ## What's the problem with `ConfigureAwait()`?
 
-In my opinion, we have several issues with the current implementation. Let's take a look ...
+### 1. The term "configure await" does not tell anything about the intent of these methods.
 
-### The term "configure await" does not tell anything about the intent of these methods.
+"Configure await" does configure the way we want the awaited code to be continued. So this is not wrong at all. But, what are the options we have? `true` and `false` are not what you would use in natural language, like if you'd as a coworker, for example.
 
-"Configure await" does configure the way we want the awaited code to be continued. So this is not wrong at all. However, you hopefully will never see a method that configures file access like this:
+It's just like you hopefully will never see a method that configures file access like this:
 
     File.ConfigureAccess("import.csv", isWriteOperation: true);
 
@@ -50,8 +50,10 @@ But instead one of these:
 
     File.OpenRead("import.csv");
     File.OpenWrite("import.csv");
+    
+`OpenRead()` and `OpenWrite()` both configure the way the file is accessed, but it's less that we "configure" anything. It's more what we want to do with it.
 
-### Passing boolean arguments to methods is considered to be a bad practice
+### 2. Passing boolean arguments to methods is considered to be a bad practice.
 
 Passing boolean arguments is very known to developers. In many cases this is introduced to existing code when requirements arise.
 
@@ -76,7 +78,7 @@ So quick: What does that `true` argument mean again? How should this continue?
 
 This makes you ponder immediately, doesn't it? It shouldn't.
 
-### Skipping `ConfigureAwait(true)` hides the purpose. 
+### 3. Skipping `ConfigureAwait(true)` hides the purpose. 
 
 Well, imagine you find this code:
 
@@ -86,7 +88,7 @@ Well, imagine you find this code:
         Users.Add(user);
     }
 
-Did the author of these lines just **forget** to add `ConfigureAwait(false)` or was it on purpose? If he ran that in a Windows Forms app, he might have had cross-thread exceptions with `ConfigureAwait(false)` because the next line did not run on the UI thread anymore. So maybe he wanted the continuation to happen on the captured context. We simply don't know. 
+Did the author of these lines just **forget** to add `ConfigureAwait(false)` or was it on purpose? If he ran that in a Windows Forms app, he might have had cross-thread exceptions with `ConfigureAwait(false)` because unless the first line, the second line does not run on the UI thread anymore. So maybe he wanted the continuation to happen on the captured context. We simply don't know. 
 
 If he added `ConfigureAwait(true)` explicitly, we could be assured that the author did that on purpose.
 
