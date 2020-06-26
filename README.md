@@ -108,7 +108,7 @@ However, chances are that he was not really sure which one to take:
 
 All of this above really bothered me for years. That's why I wanted to use obvious methods to define the behavior of code continuation. Methods which are ...
 - Simple but expressive
-- Easy to read
+- Easy to read but even easier to distinguish
 - As short as possible
 - *Optional*: Same length
 
@@ -116,7 +116,7 @@ I spent more time that I want to admit chosing the following two methods names. 
 
 Here they are ...
 
-## `KeepContext()` alias `ConfigureAwait(true)`
+## `KeepContext()` a.k.a. `ConfigureAwait(true)`
 
 This method is called at the end of an awaitable instruction and tells us that we want to **keep the context** that instruction was called with so we still have it afterwards and we can use it to execute the code that follows.
 
@@ -128,7 +128,7 @@ This method is called at the end of an awaitable instruction and tells us that w
 
 It's clear and precise. The author clearly had an intent as he added this.
 
-## `FreeContext()` alias `ConfigureAwait(false)`
+## `FreeContext()` a.k.a. `ConfigureAwait(false)`
 
 This method was harder to name: It's not just that we **don't care** that the current context is kept to execute the code that follows. We even tell the runtime that it basically can take whatever context it has to do so. By calling `FreeContext()` we can fasten things up by freeing the runtime from the responsibility to wait for a certain context. 
 
