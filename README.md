@@ -157,6 +157,15 @@ Yes, you're right. You don't need another dependency for aliasing `ConfigureAwai
 But please, if you like the idea of aliasing but you don't want to have another package dependency, just head over to that single code file and copy it over to your projects. 
 - [ObviousExtensions.cs](https://github.com/awaescher/ObviousAwait/blob/master/ObviousAwait/ObviousExtensions.cs)
 
+Alternatively, you can use [dotnet-file](https://github.com/devlooped/dotnet-file) to download and update the file directly from here:
+
+```
+dotnet file add https://github.com/awaescher/ObviousAwait/blob/master/ObviousAwait/ObviousExtensions.cs
+```
+
+And every now and then you can run `dotnet file update` to keep it up-to-date.
+
+
 Of couse you can get awareness of the pitfalls with `ConfigureAwait()` to all of your co-workers. Accepting that little extra task of deciphering whether `true` or `false` was the right way to go in that particular case. However, I'd say:
 
 > **Making things easy to get and hard to fail is always the way to go on the long run.**
