@@ -163,8 +163,9 @@ Alternatively, you can use [dotnet-file](https://github.com/devlooped/dotnet-fil
 dotnet file add https://github.com/awaescher/ObviousAwait/blob/master/ObviousAwait/ObviousExtensions.cs
 ```
 
-And every now and then you can run `dotnet file update` to keep it up-to-date.
+Every now and then you can run `dotnet file update` to keep it up-to-date.
 
+---
 
 Of couse you can get awareness of the pitfalls with `ConfigureAwait()` to all of your co-workers. Accepting that little extra task of deciphering whether `true` or `false` was the right way to go in that particular case. However, I'd say:
 
