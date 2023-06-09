@@ -54,6 +54,7 @@ namespace ObviousAwait
 
         #endregion
 
+#if NETSTANDARD2_1_OR_GREATER
         #region ValueTask
 
         /// <summary>
@@ -99,5 +100,6 @@ namespace ObviousAwait
         public static ConfiguredValueTaskAwaitable<T> FreeContext<T>(this ValueTask<T> t) => t.ConfigureAwait(false);
 
         #endregion
+#endif
     }
 }
