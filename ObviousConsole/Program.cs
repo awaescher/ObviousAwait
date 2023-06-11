@@ -14,23 +14,23 @@ namespace ObviousAwait.Console
             await Task.Delay(100).ConfigureAwait(continueOnCapturedContext: false);
             await Task.Delay(100).ConfigureAwait(continueOnCapturedContext: true);
 
-            await Task.Delay(100).KeepContext();
             await Task.Delay(100).FreeContext();
+			await Task.Delay(100).KeepContext();
 
-            #endregion
+			#endregion
 
-            #region ValueTask
+			#region ValueTask
 
-            await new ValueTask(Task.Delay(100)).ConfigureAwait(false);
+			await new ValueTask(Task.Delay(100)).ConfigureAwait(false);
             await new ValueTask(Task.Delay(100)).ConfigureAwait(true);
 
             await new ValueTask(Task.Delay(100)).ConfigureAwait(continueOnCapturedContext: false);
             await new ValueTask(Task.Delay(100)).ConfigureAwait(continueOnCapturedContext: true);
 
-            await new ValueTask(Task.Delay(100)).KeepContext();
             await new ValueTask(Task.Delay(100)).FreeContext();
+			await new ValueTask(Task.Delay(100)).KeepContext();
 
-            #endregion
-        }
-    }
+			#endregion
+		}
+	}
 }
