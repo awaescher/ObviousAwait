@@ -3,7 +3,7 @@
     <metadata>
       <id>ObviousAwait</id>
       <version>$version$</version>
-      <copyright>Andreas Wäscher 2020</copyright>
+      <copyright>Andreas Wäscher 2023</copyright>
       <title>ObviousAwait, ConfigureAwait() done right.</title>
       <authors>Andreas Wäscher</authors>
       <owners>Andreas Wäscher</owners>
