@@ -146,18 +146,17 @@ I tried alternatives, like `EmitContext()`, `IgnoreContext()` or `ElideContext()
 
 In fact, these two methods just call `ConfigureAwait(true)` or `ConfigureAwait(false)` internally making this the smallest package I have ever built and very easy to use:
 
-- Add the NuGet package [`ObviousAwait`](https://www.nuget.org/packages/ObviousAwait/) to your project(s)
+- Add the NuGet package [📦 `ObviousAwait`](https://www.nuget.org/packages/ObviousAwait/) to your project(s)
 - Replace `ConfigureAwait(true)` with `KeepContext()`
 - Replace `ConfigureAwait(false)` with `FreeContext()`
 - Enjoy
 
 ### Another dependency just for this?
 
-Yes, you're right. You don't need another dependency for aliasing `ConfigureAwait()`. We're on .NET and this is not [npm (providing some really ridiculous packages)](https://youtu.be/PI5wz2pwXIg?t=53).
-But please, if you like the idea of aliasing but you don't want to have another package dependency, just head over to that single code file and copy it over to your projects. 
+Yes, you're right. You don't need another dependency for aliasing `ConfigureAwait()`. You can also just head over to that single code file and copy it over to your projects. 
 - [ObviousExtensions.cs](https://github.com/awaescher/ObviousAwait/blob/master/ObviousAwait/ObviousExtensions.cs)
 
-Alternatively, you can use [dotnet-file](https://github.com/devlooped/dotnet-file) to download and update the file directly from here:
+Even better, you can use [dotnet-file](https://github.com/devlooped/dotnet-file) to download and update the file directly from here:
 
 ```
 dotnet file add https://github.com/awaescher/ObviousAwait/blob/master/ObviousAwait/ObviousExtensions.cs
