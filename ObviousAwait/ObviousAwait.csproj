@@ -11,7 +11,7 @@ ObviousAwait introduces two aliases: KeepContext() and FreeContext(), reducing t
         <PackageProjectUrl>https://github.com/awaescher/ObviousAwait</PackageProjectUrl>
         <RepositoryUrl>https://github.com/awaescher/ObviousAwait</RepositoryUrl>
         <PackageIcon>ObviousAwait.png</PackageIcon>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageReadmeFile>README.nuget.md</PackageReadmeFile>
         <PackageTags>configureawait;async;await;task;tasks;task-parallel-library;tpl;thread;threading;thread-synchronization;synchronizationcontext;multithreading;netstandard;obviousawait;obvious;keepcontext;freecontext</PackageTags>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <AssemblyVersion>1.2</AssemblyVersion>
@@ -28,7 +28,7 @@ ObviousAwait introduces two aliases: KeepContext() and FreeContext(), reducing t
         <Pack>True</Pack>
         <PackagePath>\</PackagePath>
       </None>
-      <None Include="..\README.md">
+      <None Include="..\README.nuget.md">
         <Pack>True</Pack>
         <PackagePath>\</PackagePath>
       </None>
