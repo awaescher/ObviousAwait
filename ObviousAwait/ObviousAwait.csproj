@@ -2,6 +2,36 @@
 
     <PropertyGroup>
         <TargetFrameworks>netstandard1.0;netstandard2.1</TargetFrameworks>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <Title>ObviousAwait, ConfigureAwait() done right.</Title>
+        <Authors>Andreas Wäscher</Authors>
+        <Description>ConfigureAwait(true) and ConfigureAwait(false) are very important when dealing with asynchronous code. However, they make code hard to read and easy to fail.
+ObviousAwait introduces two aliases: KeepContext() and FreeContext(), reducing the cognitive load while reading and writing asynchronous code.</Description>
+        <Copyright>Andreas Wäscher 2023</Copyright>
+        <PackageProjectUrl>https://github.com/awaescher/ObviousAwait</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/awaescher/ObviousAwait</RepositoryUrl>
+        <PackageIcon>ObviousAwait.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageTags>configureawait;async;await;task;tasks;task-parallel-library;tpl;thread;threading;thread-synchronization;synchronizationcontext;multithreading;netstandard;obviousawait;obvious;keepcontext;freecontext</PackageTags>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <AssemblyVersion>1.2</AssemblyVersion>
+        <FileVersion>1.2</FileVersion>
+        <Version>1.2</Version>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\docs\ObviousAwait.png">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="..\README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+    </ItemGroup>
 
 </Project>
