@@ -2,25 +2,14 @@
 using NUnit.Framework;
 using ObviousAwait;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace ObviousTests
 {
 	public class ObviousExtensionsTests
 	{
-		private FieldInfo _capturedContextField;
-		private FieldInfo _genericCapturedContextField;
-
-		[OneTimeSetUp]
-		public void Setup()
-		{
-			_capturedContextField = typeof(ConfiguredTaskAwaitable.ConfiguredTaskAwaiter)
-				.GetField("m_continueOnCapturedContext", BindingFlags.Instance | BindingFlags.NonPublic);
-
-			_genericCapturedContextField = typeof(ConfiguredTaskAwaitable<string>.ConfiguredTaskAwaiter)
-				.GetField("m_continueOnCapturedContext", BindingFlags.Instance | BindingFlags.NonPublic);
-		}
+		private const string AWAITER_FIELD_CONTINUE_ON_CAPTURED_CONTEXT = "m_continueOnCapturedContext";
+		private const string VALUETASK_FIELD_CONTINUE_ON_CAPTURED_CONTEXT = "_continueOnCapturedContext";
 
 		public class SetupTests : ObviousExtensionsTests
 		{
@@ -33,17 +22,17 @@ namespace ObviousTests
 			{
 				// non-generic tasks
 				var awaiter = Task.CompletedTask.ConfigureAwait(false).GetAwaiter();
-				_capturedContextField.GetValue(awaiter).Should().Be(false);
+				awaiter.GetPrivateFieldValue<bool>(AWAITER_FIELD_CONTINUE_ON_CAPTURED_CONTEXT).Should().Be(false);
 
 				awaiter = Task.CompletedTask.ConfigureAwait(true).GetAwaiter();
-				_capturedContextField.GetValue(awaiter).Should().Be(true);
+				awaiter.GetPrivateFieldValue<bool>(AWAITER_FIELD_CONTINUE_ON_CAPTURED_CONTEXT).Should().Be(true);
 
 				// generic tasks
 				var genericAwaiter = Task.FromResult("OK").ConfigureAwait(true).GetAwaiter();
-				_genericCapturedContextField.GetValue(genericAwaiter).Should().Be(true);
+				genericAwaiter.GetPrivateFieldValue<bool>(AWAITER_FIELD_CONTINUE_ON_CAPTURED_CONTEXT).Should().Be(true);
 
 				genericAwaiter = Task.FromResult("OK").ConfigureAwait(false).GetAwaiter();
-				_genericCapturedContextField.GetValue(genericAwaiter).Should().Be(false);
+				genericAwaiter.GetPrivateFieldValue<bool>(AWAITER_FIELD_CONTINUE_ON_CAPTURED_CONTEXT).Should().Be(false);
 			}
 		}
 
@@ -53,14 +42,24 @@ namespace ObviousTests
 			public void Sets_ConfigureAwait_To_True()
 			{
 				var awaiter = Task.CompletedTask.KeepContext().GetAwaiter();
-				_capturedContextField.GetValue(awaiter).Should().Be(true);
+				awaiter.GetPrivateFieldValue<bool>(AWAITER_FIELD_CONTINUE_ON_CAPTURED_CONTEXT).Should().Be(true);
 			}
 
 			[Test]
 			public void Sets_ConfigureAwait_To_True_For_Generic_Tasks()
 			{
 				var awaiter = Task.FromResult("OK").KeepContext().GetAwaiter();
-				_genericCapturedContextField.GetValue(awaiter).Should().Be(true);
+				awaiter.GetPrivateFieldValue<bool>(AWAITER_FIELD_CONTINUE_ON_CAPTURED_CONTEXT).Should().Be(true);
+			}
+
+
+			[Test]
+			public void Sets_ConfigureAwait_To_False_For_ValueTasks()
+			{
+				var awaitable = new ValueTask(Task.FromResult("OK")).KeepContext();
+
+				var awaitableValueTask = awaitable.GetPrivateFieldValue<ValueTask>("_value");
+				awaitableValueTask.GetPrivateFieldValue<bool>(VALUETASK_FIELD_CONTINUE_ON_CAPTURED_CONTEXT).Should().Be(true);
 			}
 		}
 
@@ -70,15 +69,29 @@ namespace ObviousTests
 			public void Sets_ConfigureAwait_To_False()
 			{
 				var awaiter = Task.CompletedTask.FreeContext().GetAwaiter();
-				_capturedContextField.GetValue(awaiter).Should().Be(false);
+				awaiter.GetPrivateFieldValue<bool>(AWAITER_FIELD_CONTINUE_ON_CAPTURED_CONTEXT).Should().Be(false);
 			}
 
 			[Test]
 			public void Sets_ConfigureAwait_To_False_For_Generic_Tasks()
 			{
 				var awaiter = Task.FromResult("OK").FreeContext().GetAwaiter();
-				_genericCapturedContextField.GetValue(awaiter).Should().Be(false);
+				awaiter.GetPrivateFieldValue<bool>(AWAITER_FIELD_CONTINUE_ON_CAPTURED_CONTEXT).Should().Be(false);
+			}
+
+			[Test]
+			public void Sets_ConfigureAwait_To_False_For_ValueTasks()
+			{
+				var awaitable = new ValueTask(Task.FromResult("OK")).FreeContext();
+
+				var awaitableValueTask = awaitable.GetPrivateFieldValue<ValueTask>("_value");
+				awaitableValueTask.GetPrivateFieldValue<bool>(VALUETASK_FIELD_CONTINUE_ON_CAPTURED_CONTEXT).Should().Be(false);
 			}
 		}
+	}
+
+	public static class ReflectionHelper
+	{
+		public static T GetPrivateFieldValue<T>(this object fromInstance, string fieldName) => (T)fromInstance.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic).GetValue(fromInstance);
 	}
 }
